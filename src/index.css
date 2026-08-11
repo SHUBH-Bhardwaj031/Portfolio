@@ -4,15 +4,29 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 90px;
 }
 
 body {
-  font-family: 'Inter', -apple-system, sans-serif;
+  margin: 0;
+  padding: 0;
   background-color: #0a192f;
+  color: #ccd6f6;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  overflow-x: hidden;
 }
 
-.font-mono {
-  font-family: 'JetBrains Mono', 'SF Mono', monospace;
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
 }
 
 ::selection {
@@ -20,33 +34,94 @@ body {
   color: #0a192f;
 }
 
-/* fade-up reveal used on scroll */
+.font-mono {
+  font-family:
+    'JetBrains Mono',
+    'SF Mono',
+    'Fira Code',
+    'Roboto Mono',
+    monospace;
+}
+
+/* --------------------------------
+   Scrollbar
+-------------------------------- */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a192f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #233554;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8892b0;
+}
+
+/* --------------------------------
+   Focus
+-------------------------------- */
+
+a:focus-visible,
+button:focus-visible {
+  outline: 1px solid #64ffda;
+  outline-offset: 4px;
+}
+
+/* --------------------------------
+   Reveal Animation
+-------------------------------- */
+
 .reveal {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
 }
+
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* thin custom scrollbar to match the dark theme */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: #0a192f;
-}
-::-webkit-scrollbar-thumb {
-  background: #233554;
-  border-radius: 5px;
+/* --------------------------------
+   Mobile
+-------------------------------- */
+
+@media (max-width: 1023px) {
+  html {
+    scroll-padding-top: 75px;
+  }
 }
 
+/* --------------------------------
+   Reduced Motion
+-------------------------------- */
+
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .reveal {
-    transition: none;
     opacity: 1;
     transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
