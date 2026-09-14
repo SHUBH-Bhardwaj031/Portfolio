@@ -31,7 +31,6 @@ function ExternalIcon() {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-
       <path
         d="M19 5l-9 9"
         stroke="currentColor"
@@ -39,7 +38,6 @@ function ExternalIcon() {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-
       <path
         d="M19 13v5a1 1 0 01-1 1H6a1 1 0 01-1-1V6a1 1 0 011-1h5"
         stroke="currentColor"
@@ -54,229 +52,78 @@ function ExternalIcon() {
 function ProjectCard({ project, reverse = false }) {
   const ref = useReveal();
 
-  const hasGithub =
-    project.github && project.github !== '#';
+  const hasGithub = project.github && project.github !== '#';
+  const hasLive = project.live && project.live !== '#';
 
-  const hasLive =
-    project.live && project.live !== '#';
-
-  const projectUrl = hasLive
-    ? project.live
-    : hasGithub
-      ? project.github
-      : null;
+  const projectUrl = hasLive ? project.live : hasGithub ? project.github : null;
 
   return (
-    <article
-      ref={ref}
-      className="
-        reveal
-        mb-28
-        lg:mb-36
-      "
-    >
+    <article ref={ref} className="reveal mb-28 lg:mb-36">
       {/* ================= DESKTOP PROJECT ================= */}
       <div
-        className={`
-          hidden
-          md:flex
-          items-center
-          w-full
-          relative
-          ${reverse ? 'flex-row-reverse' : 'flex-row'}
-        `}
+        className={`hidden md:flex items-center w-full relative ${
+          reverse ? 'flex-row-reverse' : 'flex-row'
+        }`}
       >
         {/* ================= IMAGE ================= */}
-        <div
-          className="
-            relative
-            z-10
-            w-[62%]
-            shrink-0
-          "
-        >
+        <div className="relative z-10 w-[62%] shrink-0">
           {project.image && projectUrl ? (
             <a
               href={projectUrl}
               target="_blank"
               rel="noreferrer"
               aria-label={`Open ${project.title}`}
-              className="
-                group
-                relative
-                block
-                overflow-hidden
-                rounded
-                bg-green
-              "
+              className="group relative block overflow-hidden rounded bg-green"
             >
               <img
                 src={project.image}
                 alt={`${project.title} preview`}
                 loading="lazy"
-                className="
-                  block
-                  w-full
-                  aspect-[16/9]
-                  object-cover
-                  grayscale
-                  transition-all
-                  duration-500
-                  ease-in-out
-                  group-hover:grayscale-0
-                  group-hover:scale-105
-                "
+                className="block w-full aspect-[16/9] object-cover grayscale transition-all duration-500 ease-in-out group-hover:grayscale-0 group-hover:scale-105"
               />
-
-              {/* Green Tint */}
-              <div
-                className="
-                  absolute
-                  inset-0
-                  bg-green
-                  opacity-60
-                  mix-blend-multiply
-                  transition-opacity
-                  duration-500
-                  group-hover:opacity-0
-                "
-              />
-
-              {/* Hover Label */}
-              <div
-                className="
-                  absolute
-                  inset-0
-                  flex
-                  items-center
-                  justify-center
-                  opacity-0
-                  transition-opacity
-                  duration-300
-                  group-hover:opacity-100
-                "
-              >
-                <span
-                  className="
-                    border
-                    border-white
-                    text-white
-                    bg-navy/60
-                    backdrop-blur-sm
-                    px-4
-                    py-2
-                    rounded
-                    font-mono
-                    text-xs
-                  "
-                >
+              <div className="absolute inset-0 bg-green opacity-60 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-0" />
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                <span className="border border-white text-white bg-navy/60 backdrop-blur-sm px-4 py-2 rounded font-mono text-xs">
                   View Project ↗
                 </span>
               </div>
             </a>
           ) : (
-            <div
-              className="
-                w-full
-                aspect-[16/9]
-                rounded
-                bg-light-navy
-              "
-            />
+            <div className="w-full aspect-[16/9] rounded bg-light-navy" />
           )}
         </div>
 
         {/* ================= DETAILS ================= */}
         <div
-          className={`
-            relative
-            z-30
-            w-[50%]
-            shrink-0
-            ${reverse ? 'mr-[-12%]' : 'ml-[-12%]'}
-          `}
+          className={`relative z-30 w-[50%] shrink-0 ${
+            reverse ? 'mr-[-12%]' : 'ml-[-12%]'
+          }`}
         >
-          <div
-            className={`
-              ${reverse ? 'text-left' : 'text-right'}
-            `}
-          >
-            {/* Featured Project */}
-            <p
-              className="
-                text-green
-                font-mono
-                text-sm
-                mb-2
-              "
-            >
-              Featured Project
-            </p>
+          <div className={reverse ? 'text-left' : 'text-right'}>
+            <p className="text-green font-mono text-sm mb-2">Featured Project</p>
 
-            {/* Title */}
-            <h3
-              className="
-                text-lightest-slate
-                text-2xl
-                sm:text-3xl
-                font-bold
-                mb-5
-              "
-            >
+            <h3 className="text-lightest-slate text-2xl sm:text-3xl font-bold mb-5">
               {project.title}
             </h3>
 
-            {/* Description */}
-            <div
-              className="
-                relative
-                z-40
-                bg-light-navy
-                rounded
-                shadow-2xl
-                px-6
-                py-6
-                sm:px-7
-                sm:py-7
-                text-slate
-                text-sm
-                sm:text-base
-                leading-relaxed
-              "
-            >
+            <div className="relative z-40 bg-light-navy rounded shadow-2xl px-6 py-6 sm:px-7 sm:py-7 text-slate text-sm sm:text-base leading-relaxed">
               {project.description}
             </div>
 
-            {/* Technologies */}
             <ul
-              className={`
-                flex
-                flex-wrap
-                gap-x-5
-                gap-y-2
-                mt-5
-                font-mono
-                text-xs
-                text-light-slate
-                ${reverse ? 'justify-start' : 'justify-end'}
-              `}
+              className={`flex flex-wrap gap-x-5 gap-y-2 mt-5 font-mono text-xs text-light-slate ${
+                reverse ? 'justify-start' : 'justify-end'
+              }`}
             >
               {project.tech?.map((technology) => (
-                <li key={technology}>
-                  {technology}
-                </li>
+                <li key={technology}>{technology}</li>
               ))}
             </ul>
 
-            {/* Links */}
             <div
-              className={`
-                flex
-                items-center
-                gap-5
-                mt-5
-                ${reverse ? 'justify-start' : 'justify-end'}
-              `}
+              className={`flex items-center gap-5 mt-5 ${
+                reverse ? 'justify-start' : 'justify-end'
+              }`}
             >
               {hasGithub && (
                 <a
@@ -285,12 +132,7 @@ function ProjectCard({ project, reverse = false }) {
                   rel="noreferrer"
                   title="GitHub"
                   aria-label={`View ${project.title} on GitHub`}
-                  className="
-                    text-light-slate
-                    hover:text-green
-                    transition-colors
-                    duration-200
-                  "
+                  className="text-light-slate hover:text-green transition-colors duration-200"
                 >
                   <GithubIcon />
                 </a>
@@ -303,12 +145,7 @@ function ProjectCard({ project, reverse = false }) {
                   rel="noreferrer"
                   title="Live Demo"
                   aria-label={`View ${project.title} live`}
-                  className="
-                    text-light-slate
-                    hover:text-green
-                    transition-colors
-                    duration-200
-                  "
+                  className="text-light-slate hover:text-green transition-colors duration-200"
                 >
                   <ExternalIcon />
                 </a>
@@ -326,71 +163,17 @@ function ProjectCard({ project, reverse = false }) {
             target="_blank"
             rel="noreferrer"
             aria-label={`Open ${project.title}`}
-            className="
-              group
-              relative
-              block
-              overflow-hidden
-              rounded
-              bg-green
-              mb-7
-            "
+            className="group relative block overflow-hidden rounded bg-green mb-7"
           >
             <img
               src={project.image}
               alt={`${project.title} preview`}
               loading="lazy"
-              className="
-                w-full
-                aspect-[16/9]
-                object-cover
-                grayscale
-                transition-all
-                duration-500
-                group-hover:grayscale-0
-                group-hover:scale-105
-              "
+              className="w-full aspect-[16/9] object-cover grayscale transition-all duration-500 group-hover:grayscale-0 group-hover:scale-105"
             />
-
-            <div
-              className="
-                absolute
-                inset-0
-                bg-green
-                opacity-60
-                mix-blend-multiply
-                transition-opacity
-                duration-500
-                group-hover:opacity-0
-              "
-            />
-
-            <div
-              className="
-                absolute
-                inset-0
-                flex
-                items-center
-                justify-center
-                opacity-0
-                transition-opacity
-                duration-300
-                group-hover:opacity-100
-              "
-            >
-              <span
-                className="
-                  border
-                  border-white
-                  text-white
-                  bg-navy/60
-                  px-4
-                  py-2
-                  rounded
-                  font-mono
-                  text-xs
-                "
-              >
+            <div className="absolute inset-0 bg-green opacity-60 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-0" />
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <span className="border border-white text-white bg-navy/60 px-4 py-2 rounded font-mono text-xs">
                 View Project ↗
               </span>
             </div>
@@ -398,81 +181,30 @@ function ProjectCard({ project, reverse = false }) {
         )}
 
         <div className="text-left">
-          <p
-            className="
-              text-green
-              font-mono
-              text-sm
-              mb-2
-            "
-          >
-            Featured Project
-          </p>
+          <p className="text-green font-mono text-sm mb-2">Featured Project</p>
 
-          <h3
-            className="
-              text-lightest-slate
-              text-2xl
-              font-bold
-              mb-4
-            "
-          >
+          <h3 className="text-lightest-slate text-2xl font-bold mb-4">
             {project.title}
           </h3>
 
-          <div
-            className="
-              bg-light-navy
-              rounded
-              shadow-xl
-              px-5
-              py-5
-              text-slate
-              text-sm
-              leading-relaxed
-            "
-          >
+          <div className="bg-light-navy rounded shadow-xl px-5 py-5 text-slate text-sm leading-relaxed">
             {project.description}
           </div>
 
-          <ul
-            className="
-              flex
-              flex-wrap
-              gap-x-4
-              gap-y-2
-              mt-5
-              font-mono
-              text-xs
-              text-light-slate
-            "
-          >
+          <ul className="flex flex-wrap gap-x-4 gap-y-2 mt-5 font-mono text-xs text-light-slate">
             {project.tech?.map((technology) => (
-              <li key={technology}>
-                {technology}
-              </li>
+              <li key={technology}>{technology}</li>
             ))}
           </ul>
 
-          <div
-            className="
-              flex
-              items-center
-              gap-5
-              mt-5
-            "
-          >
+          <div className="flex items-center gap-5 mt-5">
             {hasGithub && (
               <a
                 href={project.github}
                 target="_blank"
                 rel="noreferrer"
                 title="GitHub"
-                className="
-                  text-light-slate
-                  hover:text-green
-                  transition
-                "
+                className="text-light-slate hover:text-green transition"
               >
                 <GithubIcon />
               </a>
@@ -484,11 +216,7 @@ function ProjectCard({ project, reverse = false }) {
                 target="_blank"
                 rel="noreferrer"
                 title="Live Demo"
-                className="
-                  text-light-slate
-                  hover:text-green
-                  transition
-                "
+                className="text-light-slate hover:text-green transition"
               >
                 <ExternalIcon />
               </a>
@@ -497,6 +225,63 @@ function ProjectCard({ project, reverse = false }) {
         </div>
       </div>
     </article>
+  );
+}
+
+function ArchiveCard({ project }) {
+  const ref = useReveal();
+  const hasGithub = project.github && project.github !== '#';
+  const hasLive = project.live && project.live !== '#';
+
+  return (
+    <div
+      ref={ref}
+      className="reveal bg-light-navy rounded p-6 transition-transform duration-300 hover:-translate-y-1"
+    >
+      <div className="flex justify-between items-start mb-8">
+        <span className="text-green text-2xl">📂</span>
+        <div className="flex items-center gap-4">
+          {hasGithub && (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noreferrer"
+              title="GitHub"
+              aria-label={`View ${project.title} on GitHub`}
+              className="text-light-slate hover:text-green transition-colors duration-200"
+            >
+              <GithubIcon />
+            </a>
+          )}
+          {hasLive && (
+            <a
+              href={project.live}
+              target="_blank"
+              rel="noreferrer"
+              title="Live Demo"
+              aria-label={`View ${project.title} live`}
+              className="text-light-slate hover:text-green transition-colors duration-200"
+            >
+              <ExternalIcon />
+            </a>
+          )}
+        </div>
+      </div>
+
+      <h4 className="text-lightest-slate font-semibold text-lg mb-2">
+        {project.title}
+      </h4>
+
+      <p className="text-slate text-sm leading-relaxed mb-5">
+        {project.description}
+      </p>
+
+      <ul className="flex flex-wrap gap-x-4 gap-y-2 font-mono text-xs text-light-slate">
+        {project.tech?.map((technology) => (
+          <li key={technology}>{technology}</li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -513,65 +298,33 @@ export default function Projects() {
   /*
     All remaining projects
   */
-  const remainingProjects = [
-    ...projects.slice(3),
-    ...otherProjects,
-  ];
+  const remainingProjects = [...projects.slice(3), ...otherProjects];
 
   return (
-    <section
-      id="projects"
-      className="
-        max-w-5xl
-        mx-auto
-        px-6
-        sm:px-10
-        py-28
-      "
-    >
+    <section id="projects" className="max-w-5xl mx-auto px-6 sm:px-10 py-28">
       {/* Section Heading */}
-      <div
-        ref={headingRef}
-        className="reveal"
-      >
-        <SectionHeading
-          num="03"
-          title="Things I've Built"
-        />
+      <div ref={headingRef} className="reveal">
+        <SectionHeading num="03" title="Things I've Built" />
       </div>
 
       {/* ================= FIRST 3 ================= */}
       <div className="mt-14">
         {visibleProjects.map((project, index) => (
-          <ProjectCard
-            key={project.title}
-            project={project}
-            reverse={index === 1}
-          />
+          <ProjectCard key={project.title} project={project} reverse={index === 1} />
         ))}
       </div>
 
       {/* ================= MORE PROJECTS ================= */}
       <div
-        className={`
-          overflow-hidden
-          transition-all
-          duration-700
-          ease-in-out
-          ${
-            showMore
-              ? 'max-h-[10000px] opacity-100'
-              : 'max-h-0 opacity-0'
-          }
-        `}
+        className={`overflow-hidden transition-all duration-700 ease-in-out ${
+          showMore ? 'max-h-[10000px] opacity-100 mt-14' : 'max-h-0 opacity-0'
+        }`}
       >
-        {remainingProjects.map((project) => (
-          <ProjectCard
-            key={project.title}
-            project={project}
-            reverse={false}
-          />
-        ))}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {remainingProjects.map((project) => (
+            <ArchiveCard key={project.title} project={project} />
+          ))}
+        </div>
       </div>
 
       {/* ================= MORE BUTTON ================= */}
@@ -580,36 +333,13 @@ export default function Projects() {
           <button
             type="button"
             onClick={() => setShowMore((prev) => !prev)}
-            className="
-              inline-flex
-              items-center
-              gap-3
-              border
-              border-green
-              text-green
-              font-mono
-              text-sm
-              px-7
-              py-3.5
-              rounded
-              transition-all
-              duration-200
-              hover:bg-green/10
-              hover:-translate-y-0.5
-            "
+            className="inline-flex items-center gap-3 border border-green text-green font-mono text-sm px-7 py-3.5 rounded transition-all duration-200 hover:bg-green/10 hover:-translate-y-0.5"
           >
-            <span>
-              {showMore
-                ? 'Show Less'
-                : 'More Projects'}
-            </span>
-
+            <span>{showMore ? 'Show Less' : 'More Projects'}</span>
             <span
-              className={`
-                transition-transform
-                duration-300
-                ${showMore ? 'rotate-180' : ''}
-              `}
+              className={`transition-transform duration-300 ${
+                showMore ? 'rotate-180' : ''
+              }`}
             >
               ↓
             </span>
